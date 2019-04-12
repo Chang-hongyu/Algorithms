@@ -9,38 +9,40 @@
 # 若X[m-1]!=Y[n-1] 那么X[:m]和Y[:n]的最长公共子序列长度就是X[:m-1]和Y[:n]的最长公共子序列的长度、
 # 与X[:m]和Y[:n-1]的最长公共子序列 之间的最大值
 
+
 def LCS_len(X, Y):
     m = len(X)
     n = len(Y)
     # 记录最长公共子序列长度的矩阵
-    dp = [[0 for j in range(n+1)] for i in range(m+1)]
+    dp = [[0 for j in range(n + 1)] for i in range(m + 1)]
     # 记录方向的矩阵
-    flag = [[0 for j in range(n+1)] for i in range(m+1)]
+    flag = [[0 for j in range(n + 1)] for i in range(m + 1)]
 
     for i in range(m):
         for j in range(n):
             if X[i] == Y[j]:
-                dp[i+1][j+1] = dp[i][j] + 1
-                flag[i+1][j+1] = 'OK'
+                dp[i + 1][j + 1] = dp[i][j] + 1
+                flag[i + 1][j + 1] = 'OK'
             # 对应j变化，i不变化
-            elif dp[i+1][j] > dp[i][j+1]:
-                dp[i+1][j+1] = dp[i+1][j]
-                flag[i+1][j+1] = 'LE'
+            elif dp[i + 1][j] > dp[i][j + 1]:
+                dp[i + 1][j + 1] = dp[i + 1][j]
+                flag[i + 1][j + 1] = 'LE'
             else:
-                dp[i+1][j+1] = dp[i][j+1]
-                flag[i+1][j+1] = 'UP'
-    return dp,flag
+                dp[i + 1][j + 1] = dp[i][j + 1]
+                flag[i + 1][j + 1] = 'UP'
+    return dp, flag
+
 
 def printLCS(flag, X, i, j):
     if i == 0 or j == 0:
         return
     if flag[i][j] == 'OK':
-        printLCS(flag, X, i-1, j-1)
-        print(X[i-1], end="")
+        printLCS(flag, X, i - 1, j - 1)
+        print(X[i - 1], end="")
     elif flag[i][j] == 'LE':
-        printLCS(flag, X, i, j-1)
+        printLCS(flag, X, i, j - 1)
     else:
-        printLCS(flag, X, i-1, j)
+        printLCS(flag, X, i - 1, j)
 
 
 if __name__ == "__main__":

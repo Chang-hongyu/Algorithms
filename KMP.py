@@ -12,7 +12,9 @@
 
 # 当匹配失败时，j要移动的下一个位置k，存在着这样的性质：最前面的k个字符和j之前的最后k个字符是一样的，即p[0~k-1]==p[j-k~j-1]
 
-# 即当t[i]!=p[j]时，有t[i-j~i-1]==p[0~j-1] 且p[0~k-1]==p[j-k~j-1]。则有t[i-k~i-1]==p[0~k-1]
+# 即当t[i]!=p[j]时，有t[i-j~i-1]==p[0~j-1]
+
+# 且p[0~k-1]==p[j-k~j-1]。则有t[i-k~i-1]==p[0~k-1]
 
 # next[j]=k表示，当t[i]!=p[j]时，j指针的下一个位置。当j为0时，不可能再移动了，则应该要i指针后移，所以有next[0]=-1
 
@@ -43,7 +45,6 @@ class Solution:
                 k = next[k]
         return next
 
-
     def KMP(self, t, p):
         char_t = list(t)
         char_p = list(p)
@@ -60,7 +61,7 @@ class Solution:
                 i += 1
                 j += 1
             else:
-                #更新j的指针位置
+                # 更新j的指针位置
                 j = next[j]
         if j == len(char_p):
             return i - j
