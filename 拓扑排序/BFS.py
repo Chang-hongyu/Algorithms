@@ -29,7 +29,7 @@ def canFinish(numCourses, prerequisites):
         for j in range(numCourses):
             # 找到入度为0的点，跳出，进行后续处理
             if indegrees[j] == 0:
-                zeroDegree = False
+                zeroDegree = True
                 break
         # 若找不到入度为0的点，说明为有向无环图
         if not zeroDegree:
