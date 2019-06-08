@@ -31,6 +31,21 @@ def stock1(prices):
     return dp(0)
 
 
+# 法2 通用方法 状态机
+def stock2(prices):
+    n = len(prices)
+    dp_i_0 = 0
+    dp_i_1 = float('-inf')
+    dp_pre_0 = 0  # 代表dp[i-2][0]的初始值
+    for i in range(n):
+        tmp = dp_i_0
+        dp_i_0 = max(dp_i_0, dp_i_1 + prices[i])
+        dp_i_1 = max(dp_i_1, dp_pre_0 - prices[i])
+        dp_pre_0 = tmp
+    return dp_i_0
+
+
 if __name__ == "__main__":
     prices = [1, 2, 3, 0, 2]
     print(stock1(prices))
+    print(stock2(prices))

@@ -33,6 +33,32 @@ def stock1(prices, fee):
     return dp(0)
 
 
+# 法2：通用方法 状态机
+def stock2(prices, fee):
+    n = len(prices)
+    dp_i_0 = 0
+    dp_i_1 = float('-inf')
+    for i in range(n):
+        tmp = dp_i_0
+        dp_i_0 = max(dp_i_0, dp_i_1 + prices[i] - fee)
+        dp_i_1 = max(dp_i_1, tmp - prices[i])
+    return dp_i_0
+
+
+# 法3：同上，对手续费的处理放在买入时
+def stock3(prices, fee):
+    n = len(prices)
+    dp_i_0 = 0
+    dp_i_1 = float('-inf')
+    for i in range(n):
+        tmp = dp_i_0
+        dp_i_0 = max(dp_i_0, dp_i_1 + prices[i])
+        dp_i_1 = max(dp_i_1, tmp - prices[i] - fee)
+    return dp_i_0
+
+
 if __name__ == "__main__":
     prices = [1, 3, 2, 8, 4, 9]
-    print(stock1(prices,2))
+    print(stock1(prices, 2))
+    print(stock2(prices, 2))
+    print(stock3(prices, 2))

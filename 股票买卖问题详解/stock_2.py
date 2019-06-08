@@ -64,8 +64,23 @@ def stock3(prices):
     return dp(0)
 
 
+# 法4 利用状态机思路求解
+def stock4(prices):
+    n = len(prices)
+    dp_i_0 = 0
+    dp_i_1 = float('-inf')
+    # 状态在天数之间转移
+    for i in range(n):
+        # 注意dp_i_1的更新中要使用更新之前的dp_i_0，要记录这个更新之前的值
+        tmp = dp_i_0
+        dp_i_0 = max(dp_i_0, dp_i_1 + prices[i])
+        dp_i_1 = max(dp_i_1, tmp - prices[i])
+    return dp_i_0
+
+
 if __name__ == "__main__":
     prices = [7, 1, 5, 3, 6, 4]
     print(stock1(prices))
     print(stock2(prices))
     print(stock3(prices))
+    print(stock4(prices))

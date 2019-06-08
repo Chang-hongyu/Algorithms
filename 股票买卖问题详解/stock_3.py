@@ -54,7 +54,23 @@ def stock2(prices, k):
     return dp(0, k)
 
 
+# 法3 通用方法 状态机
+def stock3(prices):
+    n = len(prices)
+    dp_i10 = 0
+    dp_i11 = float('-inf')
+    dp_i20 = 0
+    dp_i21 = float('-inf')
+    for i in range(n):
+        dp_i20 = max(dp_i20, dp_i21 + prices[i])
+        dp_i21 = max(dp_i21, dp_i10 - prices[i])
+        dp_i10 = max(dp_i10, dp_i11 + prices[i])
+        dp_i11 = max(dp_i11, -prices[i])
+    return dp_i20
+
+
 if __name__ == "__main__":
     prices = [3, 3, 5, 0, 0, 3, 1, 4]
     print(stock1(prices))
     print(stock2(prices, 2))
+    print(stock3(prices))

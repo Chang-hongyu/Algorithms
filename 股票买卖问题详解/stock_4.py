@@ -34,6 +34,26 @@ def stock1(prices, k):
     return dp(0, k)
 
 
+# 法2 通用方法 状态机
+def stock2(prices, K):
+    n = len(prices)
+    if n <= 1:
+        return 0
+    if K > n // 2:
+        K = n // 2
+    dp = [[[0 for i in range(2)] for j in range(K + 1)] for k in range(n)]
+    for i in range(n):
+        for k in range(K, 0, -1):
+            if i == 0:
+                dp[i][k][0] = 0
+                dp[i][k][1] = -prices[i]
+            else:
+                dp[i][k][0] = max(dp[i - 1][k][0], dp[i - 1][k][1] + prices[i])
+                dp[i][k][1] = max(dp[i - 1][k][1], dp[i - 1][k - 1][0] - prices[i])
+    return dp[-1][K][0]
+
+
 if __name__ == "__main__":
     prices = [3, 2, 6, 5, 0, 3]
     print(stock1(prices, 2))
+    print(stock2(prices, 2))
