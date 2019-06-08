@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 # /usr/bin/env python
 # Author:   Chang
-# Function: 每次交易手续费为fee，可以进行尽可能多的交易，求最大利润
+# Function: 每次交易手续费为fee，可以进行尽可能多的交易，求最大利润  leetcode_714
 # Version : 1.0
 # Contact : 582246340@sjtu.edu.cn
 

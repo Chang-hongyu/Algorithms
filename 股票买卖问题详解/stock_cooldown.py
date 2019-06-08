@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 # /usr/bin/env python
 # Author:   Chang
-# Function: 加入一天冷却期的股票交易 可以完成多次交易
+# Function: 加入一天冷却期的股票交易 可以完成多次交易  leetcode_309
 # Version : 1.0
 # Contact : 582246340@sjtu.edu.cn
 
